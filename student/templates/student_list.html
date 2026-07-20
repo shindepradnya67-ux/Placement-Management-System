@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student List</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+
+        body{
+            background:#eef3f8;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        .container-fluid{
+            padding:25px;
+        }
+
+        .card{
+            border:none;
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .card-header{
+            background:linear-gradient(to right,#0d6efd,#4b8cff);
+            color:white;
+            padding:18px;
+        }
+
+        .card-header h2{
+            margin:0;
+            font-weight:bold;
+        }
+
+        .table-responsive{
+            overflow-x:auto;
+        }
+
+        table{
+            min-width:1800px;
+        }
+
+        .table th{
+            background:#212529;
+            color:white;
+            text-align:center;
+            vertical-align:middle;
+            white-space:nowrap;
+        }
+
+        .table td{
+            text-align:center;
+            vertical-align:middle;
+            white-space:nowrap;
+        }
+
+        img{
+            width:70px;
+            height:70px;
+            border-radius:50%;
+            object-fit:cover;
+            border:3px solid #0d6efd;
+        }
+
+        .btn{
+            border-radius:8px;
+        }
+
+        .btn-sm{
+            margin:2px;
+        }
+
+        .badge{
+            padding:8px 12px;
+            font-size:12px;
+            border-radius:20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <div class="d-flex justify-content-between align-items-center">
+
+                <h2>🎓 Student List</h2>
+
+                <form method="GET" class="d-flex">
+
+                    <input
+                        type="text"
+                        name="search"
+                        class="form-control me-2"
+                        placeholder="Search Student">
+
+                    <button
+                        type="submit"
+                        class="btn btn-light">
+                        Search
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <div class="card-body">
+
+            <a href="{% url 'register' %}" class="btn btn-success mb-3">
+                ➕ Add New Student
+            </a>
+
+            <div class="table-responsive">
+
+                <table class="table table-bordered table-hover table-striped align-middle">
+
+                    <thead>
+
+                    <tr>
+
+                        <th>Photo</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Qualification</th>
+                        <th>Skills</th>
+                        <th>Experience</th>
+                        <th>Domain</th>
+                        <th>Hobbies</th>
+                        <th>Certification</th>
+                        <th>Projects</th>
+                        <th>LinkedIn</th>
+                        <th>GitHub</th>
+                        <th>Portfolio</th>
+                        <th>Resume</th>
+                        <th>Placement Status</th>
+                        <th>Action</th>
+
+                    </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    {% for student in students %}
+
+                    <tr>
+
+                        <td>
+
+                            {% if student.photo %}
+                                <img src="{{ student.photo.url }}">
+                            {% else %}
+                                No Photo
+                            {% endif %}
+
+                        </td>
+
+                        <td>{{ student.name }}</td>
+
+                        <td>{{ student.email }}</td>
+
+                        <td>{{ student.phone }}</td>
+
+                        <td>{{ student.qualification }}</td>
+
+                        <td>{{ student.skills }}</td>
+
+                        <td>{{ student.experience }}</td>
+
+                        <td>{{ student.domain }}</td>
+
+                        <td>{{ student.hobbies }}</td>
+
+                        <td>{{ student.certification }}</td>
+
+                        <td>{{ student.projects }}</td>
+                                                <td>
+
+                            {% if student.linkedin %}
+                                <a href="{{ student.linkedin }}" target="_blank" class="btn btn-primary btn-sm">
+                                    Open
+                                </a>
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if student.github %}
+                                <a href="{{ student.github }}" target="_blank" class="btn btn-dark btn-sm">
+                                    Open
+                                </a>
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if student.portfolio %}
+                                <a href="{{ student.portfolio }}" target="_blank" class="btn btn-info btn-sm">
+                                    Open
+                                </a>
+                            {% else %}
+                                -
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if student.resume %}
+
+                                <a href="{{ student.resume.url }}" target="_blank" class="btn btn-success btn-sm">
+                                    Download
+                                </a>
+
+                            {% else %}
+
+                                No Resume
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            {% if student.placement_status == "Active" %}
+
+                                <span class="badge bg-success">
+                                    Active
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-danger">
+                                    Opt Out
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+
+                            <a href="{% url 'edit_student' student.id %}" class="btn btn-warning btn-sm">
+                                Edit
+                            </a>
+
+                            <a href="{% url 'delete_student' student.id %}" class="btn btn-danger btn-sm">
+                                Delete
+                            </a>
+
+                            {% if student.placement_status == "Active" %}
+
+                                <a href="{% url 'opt_out' student.id %}" class="btn btn-secondary btn-sm">
+                                    Opt Out
+                                </a>
+
+                            {% else %}
+
+                                <button class="btn btn-secondary btn-sm" disabled>
+                                    Opted Out
+                                </button>
+
+                            {% endif %}
+
+                        </td>
+
+                    </tr>
+
+                    {% empty %}
+
+                    <tr>
+
+                        <td colspan="17" class="text-center text-danger fw-bold">
+
+                            No Students Found
+
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

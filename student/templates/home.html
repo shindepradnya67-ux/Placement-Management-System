@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+
+    <h1 class="display-4 fw-bold text-primary">
+        🎓 Placement Management System
+    </h1>
+
+    <p class="lead text-secondary mt-3">
+        Welcome to Placement Management System
+    </p>
+
+    <hr class="my-4">
+
+    <div class="row mt-5">
+
+        <div class="col-md-3 mb-4">
+            <div class="card p-4 text-center shadow-lg border-0 rounded-4 h-100">
+                <h1>👨‍🎓</h1>
+                <h3>Students</h3>
+                <p>Manage Student Records</p>
+
+                {% if student_count %}
+                <h5 class="text-primary">{{ student_count }}</h5>
+                {% endif %}
+
+                <a href="{% url 'student_list' %}" class="btn btn-primary w-100">
+                    View Students
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card p-4 text-center shadow-lg border-0 rounded-4 h-100">
+                <h1>🏢</h1>
+                <h3>Companies</h3>
+                <p>Manage Company Details</p>
+
+                {% if company_count %}
+                <h5 class="text-success">{{ company_count }}</h5>
+                {% endif %}
+
+                <a href="{% url 'company_list' %}" class="btn btn-success w-100">
+                    View Companies
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card p-4 text-center shadow-lg border-0 rounded-4 h-100">
+                <h1>💼</h1>
+                <h3>Jobs</h3>
+                <p>Manage Job Openings</p>
+
+                {% if job_count %}
+                <h5 class="text-warning">{{ job_count }}</h5>
+                {% endif %}
+
+                <a href="{% url 'job_list' %}" class="btn btn-warning w-100">
+                    View Jobs
+                </a>
+            </div>
+        </div>
+
+        <div class="col-md-3 mb-4">
+            <div class="card p-4 text-center shadow-lg border-0 rounded-4 h-100">
+                <h1>📄</h1>
+                <h3>Applications</h3>
+                <p>Manage Job Applications</p>
+
+                {% if application_count %}
+                <h5 class="text-danger">{{ application_count }}</h5>
+                {% endif %}
+
+                <a href="{% url 'application_list' %}" class="btn btn-danger w-100">
+                    View Applications
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <hr class="my-5">
+
+    <h2 class="mb-4 fw-bold">
+        ⚡ Quick Actions
+    </h2>
+
+    <div class="d-flex justify-content-center flex-wrap gap-3">
+
+        <a href="{% url 'register' %}" class="btn btn-primary btn-lg">
+            ➕ Add Student
+        </a>
+
+        <a href="{% url 'company_register' %}" class="btn btn-success btn-lg">
+            🏢 Add Company
+        </a>
+
+        <a href="{% url 'job_register' %}" class="btn btn-warning btn-lg">
+            💼 Add Job
+        </a>
+
+        <a href="{% url 'apply_job' %}" class="btn btn-danger btn-lg">
+            📄 Apply Job
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

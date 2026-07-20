@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Job Registration{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="card shadow-lg border-0">
+
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">💼 Job Registration</h3>
+                </div>
+
+                <div class="card-body">
+
+                    <form method="POST">
+
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Company</label>
+                            {{ form.company }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Position</label>
+                            {{ form.position }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Domain</label>
+                            {{ form.domain }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Qualification</label>
+                            {{ form.qualification }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Package</label>
+                            {{ form.package }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            {{ form.location }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contract Type</label>
+                            {{ form.contract_type }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Skills</label>
+                            {{ form.skills }}
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Experience</label>
+                            {{ form.experience }}
+                        </div>
+
+                        <div class="text-center mt-4">
+
+                            <button type="submit" class="btn btn-primary">
+                                Add Job
+                            </button>
+
+                            <a href="{% url 'job_list' %}" class="btn btn-success">
+                                View Jobs
+                            </a>
+
+                            <a href="{% url 'home' %}" class="btn btn-secondary">
+                                Home
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
